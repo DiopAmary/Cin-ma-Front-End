@@ -18,8 +18,8 @@
             <div *ngFor = "let s of salles._embedded.salles" class="col-md-6 mt-3">
               <div class="card">
                 <h5 class="card-header">{{s.name}}</h5>
-                <div class="card-body">
-                  content of salles
+                <div class="card-body" *ngIf ="s.projections">
+                  <img src="{{cinemaService.host+'/imageFilm/'+s.projections._embedded.projections[10].film.id}}" alt="Image du film" >
                 </div>
               </div>
             </div>
