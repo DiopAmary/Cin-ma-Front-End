@@ -2,3 +2,8 @@ img{
   width:150px;
   height: auto;
 }
+
+.ticket{
+  margin : 5px;
+  width : 50px;
+}

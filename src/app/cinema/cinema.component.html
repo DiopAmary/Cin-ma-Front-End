@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row mt-3">
-    <div class="col-md-4">
+    <div class="col-md-2">
       <ul *ngIf="villes" class="list-group">
         <li *ngFor="let v of villes._embedded.villes" [ngClass] = "v==currentVille?'active':''" class = "list-group-item" (click) = "onGetCinemas(v)">{{v.name}}</li>
       </ul>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-10">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Liste des cinémas</h3>
@@ -24,9 +24,16 @@
                   </div>
                   <div class="col-md-6">
                     <ul class = "list-group">
-                      <li class = "list-group-item bg-primary"><strong style="color: white;">Séeances</strong></li>
-                      <li class = "list-group-item" *ngFor = "let p of s.projections._embedded.projections">{{p.seance.heureDebut|date:'h:mm a'}}</li>
+                      <li class = "list-group-item bg-light"><strong >Séeances</strong></li>
+                      <li [ngClass] = "p==currentProjection?'active':''" (click) = "onGetPlace(p)" class = "list-group-item" *ngFor = "let p of s.projections._embedded.projections">{{p.seance.heureDebut|date:'h:mm a'}} - <strong>( {{p.prix|number:'0.00'}} DH)</strong></li>
                     </ul>
+                  </div>
+                  <div *ngIf = "currentProjection" class = "mt-3">
+                    <div *ngIf = "currentProjection.tickets._embedded.tickets">
+                      <button class = "btn btn-primary ticket" *ngFor = "let t of currentProjection.tickets._embedded.tickets">
+                        {{t.place.numero}}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
