@@ -18,8 +18,16 @@
             <div *ngFor = "let s of salles._embedded.salles" class="col-md-6 mt-3">
               <div class="card">
                 <h5 class="card-header">{{s.name}}</h5>
-                <div class="card-body" *ngIf ="s.projections">
-                  <img src="{{cinemaService.host+'/imageFilm/'+s.projections._embedded.projections[10].film.id}}" alt="Image du film" >
+                <div class="card-body row" *ngIf ="s.projections">
+                  <div class="col-md-6">
+                    <img src="{{cinemaService.host+'/imageFilm/'+s.projections._embedded.projections[0].film.id}}" alt="Image du film" >
+                  </div>
+                  <div class="col-md-6">
+                    <ul class = "list-group">
+                      <li class = "list-group-item bg-primary"><strong style="color: white;">Séeances</strong></li>
+                      <li class = "list-group-item" *ngFor = "let p of s.projections._embedded.projections">{{p.seance.heureDebut|date:'h:mm a'}}</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
